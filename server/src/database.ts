@@ -56,7 +56,8 @@ export async function saveAssessment(input: AssessmentInput, result: AgentResult
         clientRow.rows[0].id, input.applicationName, input.owner,
         input.scores, result.averages, result.weightedScore,
         result.thresholdPassed, result.recommendation, result.rationale,
-        result.modernizationActions, result.completedNodes,
+        JSON.stringify(result.modernizationActions),
+        JSON.stringify(result.completedNodes),
       ],
     );
     await client.query("COMMIT");
