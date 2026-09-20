@@ -1,6 +1,6 @@
 # Application Portfolio Rationalizer
 
-Production-oriented monorepo for application portfolio rationalization using Angular, LangGraph and PostgreSQL.
+Production-oriented monorepo for application portfolio rationalization using Angular, Python, LangGraph and PostgreSQL.
 
 ## Architecture
 
