@@ -1,0 +1,12 @@
+{
+  "name": "angular-langgraph-portfolio-rationalizer",
+  "private": true,
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "build": "npm run build -w client && npm run build -w server",
+    "test": "npm run test -w server",
+    "dev:client": "npm run start -w client",
+    "dev:server": "npm run dev -w server"
+  },
+  "engines": { "node": ">=22" }
+}
