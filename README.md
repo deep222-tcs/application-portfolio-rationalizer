@@ -5,8 +5,8 @@ Production-oriented monorepo for application portfolio rationalization using Ang
 ## Architecture
 
 - Angular 22 standalone frontend with Business, Technology and Operations tabs
-- Node.js and Express REST API
-- LangGraph.js workflow for validation, averages, weighted scoring, TIME classification and recommendations
+- Python FastAPI REST API
+- LangGraph for Python workflow for validation, averages, weighted scoring, TIME classification and recommendations
 - PostgreSQL for client and assessment history
 - Docker multi-stage image serving the Angular build from the API container
 - Railway/Render deployment configuration for the web service and managed PostgreSQL
@@ -21,6 +21,7 @@ This is a custom implementation inspired by the Gartner TIME model. It is not an
 npm install
 docker compose up db -d
 cp .env.example .env
+python -m pip install -r requirements.txt
 npm run dev:server
 npm run dev:client
 ```
@@ -63,7 +64,7 @@ Railway supplies `PORT` automatically. The container binds to `0.0.0.0` and serv
 
 ## LangGraph flow
 
-`START → validateInput → domainAverages → weightedCalculation → timeClassification → recommendationExplanation → END`
+`START → validate_input → domain_averages → weighted_calculation → time_classification → recommendation_explanation → END`
 
 Numeric scoring remains deterministic and auditable. An optional LLM node can later enrich narrative recommendations without changing the authoritative score.
 

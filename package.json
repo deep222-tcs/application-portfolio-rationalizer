@@ -1,12 +1,12 @@
 {
   "name": "angular-langgraph-portfolio-rationalizer",
   "private": true,
-  "workspaces": ["client", "server"],
+  "workspaces": ["client"],
   "scripts": {
-    "build": "npm run build -w client && npm run build -w server",
-    "test": "npm run test -w server",
+    "build": "npm run build -w client",
+    "test": "python -m pytest backend/tests",
     "dev:client": "npm run start -w client",
-    "dev:server": "npm run dev -w server"
+    "dev:server": "uvicorn backend.app:app --reload --port 3000"
   },
   "engines": { "node": ">=22" }
 }

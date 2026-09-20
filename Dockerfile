@@ -1,21 +1,17 @@
-FROM node:24-bookworm-slim AS build
+FROM node:24-bookworm-slim AS frontend-build
 WORKDIR /app
 COPY package*.json ./
 COPY client/package*.json client/
-COPY server/package*.json server/
 RUN npm ci
 COPY client client
-COPY server server
-RUN npm run build
+RUN npm run build -w client
 
-FROM node:24-bookworm-slim AS runtime
+FROM python:3.13-slim AS runtime
 WORKDIR /app
-ENV NODE_ENV=production
-COPY package*.json ./
-COPY client/package*.json client/
-COPY server/package*.json server/
-RUN npm ci --omit=dev --workspace server
-COPY --from=build /app/server/dist server/dist
-COPY --from=build /app/client/dist/client/browser client-dist
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY backend backend
+COPY --from=frontend-build /app/client/dist/client/browser client-dist
 EXPOSE 3000
-CMD ["node", "server/dist/index.js"]
+CMD ["sh", "-c", "uvicorn backend.app:app --host 0.0.0.0 --port ${PORT:-3000}"]

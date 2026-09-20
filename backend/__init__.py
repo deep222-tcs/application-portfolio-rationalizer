@@ -1,0 +1,1 @@
+"""Application Portfolio Rationalizer backend."""
